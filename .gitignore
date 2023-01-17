@@ -1,0 +1,7 @@
+.DS_Store
+/project/target/
+/project/project/target/
+/target/
+/.bsp/
+/.idea/
+/logs/
