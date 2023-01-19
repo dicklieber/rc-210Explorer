@@ -1,11 +1,11 @@
-name := "rc210dump"
+name := "rc210view"
 
 organization := "net.wa9nnn"
 
 
 ThisBuild / scalaVersion := "2.13.10"
 
-val logbackVersion = "1.2.3"
+val logbackVersion = "1.4.5"
 
 libraryDependencies ++= Seq(
   "org.specs2" %% "specs2-core" % "4.3.5" % Test,

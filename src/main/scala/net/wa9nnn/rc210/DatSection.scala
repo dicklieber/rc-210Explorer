@@ -4,10 +4,10 @@ import com.typesafe.scalalogging.LazyLogging
 
 import scala.util.{Failure, Success}
 
-case class DatSection(sectionName: String, values: Seq[DataItem]) extends LazyLogging {
+case class DatSection(sectionName: String, dataItems: Seq[DataItem]) extends LazyLogging {
   def dump(): Unit = {
-    logger.info(sectionName)
-    values.foreach {
+    logger.info("Section: {} ({} items)", sectionName, dataItems.size)
+    dataItems.foreach {
       _.dump()
     }
   }
@@ -16,8 +16,10 @@ case class DatSection(sectionName: String, values: Seq[DataItem]) extends LazyLo
 class SectionBuilder(name: String) extends LazyLogging {
   private val entriesBuilder = Seq.newBuilder[DataItem]
 
-  def appendLine(dataLine: String): Unit = {
-    DataItem(dataLine) match {
+  def appendLine(dataLine: String, index:Int): Unit = {
+    val debugInfo = DebugInfo(dataLine, index)
+
+    DataItem(debugInfo) match {
       case Failure(exception) =>
         logger.error("Parsing line: {}", exception, dataLine)
       case Success(di) =>
